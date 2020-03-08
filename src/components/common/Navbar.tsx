@@ -8,19 +8,11 @@ const Navbar = () => {
             <Container fluid>
                 <Responsive as={Menu.Item} {...Responsive.onlyComputer}>
                     <Icon name="code" color="blue" />
-                    <strong>FOOBAR</strong>
+                    <strong>Top Ramen</strong>
                 </Responsive>
                 <Link className="item" to="/">
                     <Icon name="home" />
                     Home
-                </Link>
-                <Link className="item" to="/example">
-                    <Icon name="star outline" />
-                    Example
-                </Link>
-                <Link className="item" to="/search">
-                    <Icon name="search" />
-                    Search
                 </Link>
                 <Responsive
                     as={Menu.Item}

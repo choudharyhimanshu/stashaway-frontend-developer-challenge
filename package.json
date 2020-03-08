@@ -1,5 +1,5 @@
 {
-  "name": "redux-react-whiteapp",
+  "name": "top-ramen-restaurents",
   "version": "0.1.0",
   "private": true,
   "husky": {
@@ -34,7 +34,7 @@
     "prettier:check": "prettier --check src/**/*.{ts,tsx,json,css}",
     "prettier:write": "prettier --write src/**/*.{ts,tsx,json,css}",
     "prettier:watch": "onchange 'src/**/*.{ts,tsx,json,css}' -- prettier --write {{changed}}",
-    "firebase:deploy": "firebase deploy --project foobar-007"
+    "firebase:deploy": "firebase deploy --project hackathons-007"
   },
   "eslintConfig": {
     "extends": "react-app"

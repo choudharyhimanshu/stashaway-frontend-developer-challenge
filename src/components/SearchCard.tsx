@@ -18,7 +18,7 @@ function SearchCard(props: ISearchCardProps) {
             fluid
         >
             <Card.Content>
-                <Card.Header>{props.searchItem.name}</Card.Header>
+                <Card.Header>{props.searchItem.variety}</Card.Header>
                 <Card.Meta>A sub title</Card.Meta>
                 <Card.Description>Here goes some Description</Card.Description>
             </Card.Content>

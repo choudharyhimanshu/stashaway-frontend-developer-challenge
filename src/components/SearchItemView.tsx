@@ -15,7 +15,7 @@ function SearchItemView(props: ISearchItemViewProps) {
             <Grid.Row>
                 <Grid.Column>
                     <Header as="h3" floated="left" className="m-0 p-0">
-                        {searchItem.name}
+                        {searchItem.variety}
                     </Header>
                     <Header
                         as="h4"

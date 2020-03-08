@@ -1,6 +1,8 @@
-# stashaway-frontend-developer-challenge
+# Top Ramen Restaurents
 
-### See it LIVE! : URL
+Challenge: https://www.hackerearth.com/challenges/hiring/stashaway-frontend-developer-challenge/
+
+### See it LIVE! : https://top-ramen-restro.web.app/
 
 ### Technical Stack
 

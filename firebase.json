@@ -1,6 +1,6 @@
 {
     "hosting": {
-      "site": "redux-whiteapp",
+      "site": "top-ramen-restro",
       "public": "build",
       "ignore": [
         "firebase.json",

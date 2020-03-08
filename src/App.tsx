@@ -3,9 +3,7 @@ import { Route, Switch, Redirect, HashRouter } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 import { TOAST_CONFIG } from './constants';
-import ExampleContainer from './containers/ExampleContainer';
 import HomeContainer from './containers/HomeContainer';
-import SearchContainer from './containers/SearchContainer';
 import Navbar from './components/common/Navbar';
 
 import './css/helper.css';
@@ -19,7 +17,7 @@ class App extends React.Component<{}> {
     }
 
     componentDidMount() {
-        toast.info('Welcome to FOOBAR!');
+        toast.info('Welcome to Top Ramen Restaurents!');
     }
 
     render() {
@@ -29,8 +27,6 @@ class App extends React.Component<{}> {
 
                 <Switch>
                     <Route exact path="/" component={HomeContainer} />
-                    <Route exact path="/example" component={ExampleContainer} />
-                    <Route exact path="/search" component={SearchContainer} />
 
                     <Redirect to="/" />
                 </Switch>

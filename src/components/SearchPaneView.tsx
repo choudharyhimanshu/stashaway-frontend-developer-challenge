@@ -67,9 +67,9 @@ function SearchPaneView(props: ISearchPaneViewProps) {
                                         mobile={16}
                                         tablet={8}
                                         computer={4}
+                                        key={result.id}
                                     >
                                         <SearchCard
-                                            key={result.id}
                                             searchItem={result}
                                             onItemSelect={setSelectedItem}
                                             isSelected={

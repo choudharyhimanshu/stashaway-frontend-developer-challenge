@@ -1,4 +1,6 @@
 import { ISearchItem } from '../models/SearchItem';
+import to from 'await-to-js';
+import { ISearchResponse } from '../models/SearchResponse';
 
 class SearchService {
     private apiBase: string;
@@ -31,10 +33,41 @@ class SearchService {
             method: 'GET'
         });
 
-        return response && response.ok
-            ? response.json()
-            : SearchService.handleErrorResponse(response);
+        return new Promise<ISearchItem[]>(async (resolve, reject) => {
+            if (response && response.ok) {
+                const [error, responseBody] = await to<ISearchResponse[]>(
+                    response.json()
+                );
+
+                if (responseBody) {
+                    resolve(
+                        responseBody.map((item, index) => {
+                            const topTen = item['Top Ten'];
+                            return {
+                                id: index,
+                                variety: item['Variety'],
+                                style: item['Style'],
+                                country: item['Country'],
+                                stars: item['Stars'],
+                                topYear:
+                                    topTen !== 'NaN'
+                                        ? Number(topTen.split(' ')[0])
+                                        : undefined,
+                                topRank:
+                                    topTen !== 'NaN'
+                                        ? Number(topTen.split(' ')[1].slice(1))
+                                        : undefined
+                            };
+                        })
+                    );
+                } else {
+                    reject(error);
+                }
+            } else {
+                reject(SearchService.handleErrorResponse(response));
+            }
+        });
     }
 }
 
-export default new SearchService('https://jsonplaceholder.typicode.com/users');
+export default new SearchService('http://starlord.hackerearth.com/TopRamen');
