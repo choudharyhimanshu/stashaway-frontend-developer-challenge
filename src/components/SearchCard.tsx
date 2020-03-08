@@ -40,7 +40,7 @@ function SearchCard(props: ISearchCardProps) {
                     {searchItem.brand}
                 </Label>
                 {searchItem.topRank && searchItem.topYear && (
-                    <Label basic color="blue" icon>
+                    <Label basic color="blue">
                         <Icon name="trophy" />
                         {searchItem.topYear}
                         <Label.Detail>#{searchItem.topRank}</Label.Detail>

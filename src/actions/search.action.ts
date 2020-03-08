@@ -38,9 +38,30 @@ export const fetchItems = (dispatch: Dispatch<ISearchAction>) => {
                 data: { errorMessage: error.toString() }
             });
         } else {
+            const filteredDocuments = response
+                ? response.filter(item => {
+                      if (
+                          searchRequest.variety &&
+                          !item.variety
+                              .toLowerCase()
+                              .includes(searchRequest.variety.toLowerCase())
+                      ) {
+                          return false;
+                      }
+                      if (
+                          searchRequest.year &&
+                          ((item.topYear &&
+                              item.topYear !== Number(searchRequest.year)) ||
+                              !item.topYear)
+                      ) {
+                          return false;
+                      }
+                      return true;
+                  })
+                : undefined;
             dispatch({
                 type: ESearchActionType.SUCCESS,
-                data: { searchResults: response, errorMessage: '' }
+                data: { searchResults: filteredDocuments, errorMessage: '' }
             });
         }
     };

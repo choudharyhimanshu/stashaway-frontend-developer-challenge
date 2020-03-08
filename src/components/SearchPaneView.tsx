@@ -1,13 +1,6 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import {
-    Grid,
-    Loader,
-    Header,
-    Icon,
-    Responsive,
-    Modal
-} from 'semantic-ui-react';
+import { Grid, Loader, Header, Icon, Modal } from 'semantic-ui-react';
 
 import { ISearchItem } from '../models/SearchItem';
 import { IRootReducerState } from '../store/configureStore';
@@ -19,6 +12,12 @@ export interface ISearchPaneViewProps {
     isLoading: boolean;
     errorMessage: string;
     results?: ISearchItem[];
+}
+
+function sortResults(results: ISearchItem[], sortBy: string) {
+    return results.sort((a, b) => {
+        return a[sortBy] && b[sortBy] ? a[sortBy] - b[sortBy] : 0;
+    });
 }
 
 function SearchPaneView(props: ISearchPaneViewProps) {
@@ -34,14 +33,7 @@ function SearchPaneView(props: ISearchPaneViewProps) {
                 </Grid.Column>
             </Grid.Row>
             <Grid.Row>
-                <Grid.Column
-                    mobile={16}
-                    tablet={16}
-                    widescreen={selectedItem ? 11 : 16}
-                    computer={selectedItem ? 11 : 16}
-                    largeScreen={selectedItem ? 11 : 16}
-                    className="transition-width"
-                >
+                <Grid.Column>
                     {isLoading ? (
                         <Loader
                             active
@@ -62,22 +54,36 @@ function SearchPaneView(props: ISearchPaneViewProps) {
                             </Header>
                         ) : (
                             <Grid>
-                                {results.map(result => (
-                                    <Grid.Column
-                                        mobile={16}
-                                        tablet={8}
-                                        computer={4}
-                                        key={result.id}
-                                    >
-                                        <SearchCard
-                                            searchItem={result}
-                                            onItemSelect={setSelectedItem}
-                                            isSelected={
-                                                selectedItem?.id === result.id
-                                            }
-                                        />
+                                <Grid.Row>
+                                    <Grid.Column>
+                                        <Header as="h4">
+                                            Total Results: {results.length}
+                                        </Header>
                                     </Grid.Column>
-                                ))}
+                                </Grid.Row>
+                                <Grid.Row>
+                                    {sortResults(
+                                        sortResults(results, 'topRank'),
+                                        'topYear'
+                                    ).map(result => (
+                                        <Grid.Column
+                                            mobile={16}
+                                            tablet={8}
+                                            computer={4}
+                                            key={result.id}
+                                            className="mb-2"
+                                        >
+                                            <SearchCard
+                                                searchItem={result}
+                                                onItemSelect={setSelectedItem}
+                                                isSelected={
+                                                    selectedItem?.id ===
+                                                    result.id
+                                                }
+                                            />
+                                        </Grid.Column>
+                                    ))}
+                                </Grid.Row>
                             </Grid>
                         )
                     ) : (
@@ -99,38 +105,21 @@ function SearchPaneView(props: ISearchPaneViewProps) {
                     )}
                 </Grid.Column>
                 {selectedItem && (
-                    <>
-                        <Responsive
-                            as={Modal}
-                            maxWidth={991}
-                            centered={false}
-                            open
-                        >
-                            <Modal.Content>
-                                <SearchItemView
-                                    searchItem={selectedItem}
-                                    onViewClose={() =>
-                                        setSelectedItem(undefined)
-                                    }
-                                />
-                            </Modal.Content>
-                        </Responsive>
-                        <Responsive
-                            minWidth={992}
-                            as={Grid.Column}
-                            mobile={16}
-                            tablet={16}
-                            widescreen={5}
-                            computer={5}
-                            largeScreen={5}
-                            className="animate-visibility sm-pt-5 sm-pb-5"
-                        >
+                    <Modal
+                        centered
+                        open
+                        size="small"
+                        closeOnDimmerClick
+                        closeOnEscape
+                        onClose={() => setSelectedItem(undefined)}
+                    >
+                        <Modal.Content>
                             <SearchItemView
                                 searchItem={selectedItem}
                                 onViewClose={() => setSelectedItem(undefined)}
                             />
-                        </Responsive>
-                    </>
+                        </Modal.Content>
+                    </Modal>
                 )}
             </Grid.Row>
         </Grid>

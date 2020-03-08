@@ -57,10 +57,8 @@ function SearchItemView(props: ISearchItemViewProps) {
                     </div>
                     <div className="mb-2">
                         <strong>Brand: </strong>
-                        <Label basic className="mr-1">
-                            <Icon name="tag" />
-                            {searchItem.brand}
-                        </Label>
+                        <Icon name="tag" />
+                        {searchItem.brand}
                     </div>
                     <div className="mb-2">
                         <strong>Rating: </strong>

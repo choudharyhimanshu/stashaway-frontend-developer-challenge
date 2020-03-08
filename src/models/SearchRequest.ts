@@ -1,3 +1,4 @@
 export interface ISearchRequest {
-    name: string;
+    variety: string;
+    year: string;
 }

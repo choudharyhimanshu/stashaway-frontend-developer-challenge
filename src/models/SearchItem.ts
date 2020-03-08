@@ -7,4 +7,5 @@ export interface ISearchItem {
     stars?: number;
     topYear?: number;
     topRank?: number;
+    [key: string]: any;
 }
