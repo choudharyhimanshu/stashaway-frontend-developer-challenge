@@ -38,6 +38,7 @@ export const fetchItems = (dispatch: Dispatch<ISearchAction>) => {
                 data: { errorMessage: error.toString() }
             });
         } else {
+            console.log(new Set(response?.map(item => item.country)));
             const filteredDocuments = response
                 ? response.filter(item => {
                       if (
@@ -53,6 +54,14 @@ export const fetchItems = (dispatch: Dispatch<ISearchAction>) => {
                           ((item.topYear &&
                               item.topYear !== Number(searchRequest.year)) ||
                               !item.topYear)
+                      ) {
+                          return false;
+                      }
+                      if (
+                          searchRequest.country &&
+                          ((item.country &&
+                              item.country !== searchRequest.country) ||
+                              !item.country)
                       ) {
                           return false;
                       }

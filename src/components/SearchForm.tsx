@@ -19,6 +19,23 @@ const SELECT_YEARS = [
     { key: '2019', text: '2019', value: '2019' }
 ];
 
+const SELECT_COUNTRIES = [
+    { key: 'undefined', text: 'Select', value: '' },
+    { key: 'Myanmar', text: 'Myanmar', value: 'Myanmar' },
+    { key: 'Singapore', text: 'Singapore', value: 'Singapore' },
+    { key: 'SG', text: 'SG', value: 'SG' },
+    { key: 'Taiwan', text: 'Taiwan', value: 'Taiwan' },
+    { key: 'China', text: 'China', value: 'China' },
+    { key: 'Malaysia', text: 'Malaysia', value: 'Malaysia' },
+    { key: 'JPN', text: 'JPN', value: 'JPN' },
+    { key: 'Thailand', text: 'Thailand', value: 'Thailand' },
+    { key: 'Japan', text: 'Japan', value: 'Japan' },
+    { key: 'South Korea', text: 'South Korea', value: 'South Korea' },
+    { key: 'USA', text: 'USA', value: 'USA' },
+    { key: 'Indonesia', text: 'Indonesia', value: 'Indonesia' },
+    { key: 'Hong Kong', text: 'Hong Kong', value: 'Hong Kong' }
+];
+
 export interface ISearchFormProps {
     isSearching: boolean;
     handleSearch: (searchRequest: ISearchRequest) => void;
@@ -29,9 +46,10 @@ function SearchForm(props: ISearchFormProps) {
 
     const [variety, setVariety] = React.useState('');
     const [year, setYear] = React.useState('');
+    const [country, setCountry] = React.useState('');
 
     const handleFormSubmit = () => {
-        props.handleSearch({ variety, year });
+        props.handleSearch({ variety, year, country });
     };
 
     return (
@@ -56,6 +74,19 @@ function SearchForm(props: ISearchFormProps) {
                         options={SELECT_YEARS}
                     />
                 </Form.Field>
+                <Form.Field inline width={4}>
+                    <label>Country: </label>
+                    <Select
+                        placeholder="Select"
+                        value={country}
+                        onChange={(event, option) =>
+                            setCountry(
+                                option.value ? option.value.toString() : ''
+                            )
+                        }
+                        options={SELECT_COUNTRIES}
+                    />
+                </Form.Field>
                 <Form.Button
                     type="button"
                     basic
@@ -63,6 +94,7 @@ function SearchForm(props: ISearchFormProps) {
                     onClick={() => {
                         setVariety('');
                         setYear('');
+                        setCountry('');
                     }}
                 >
                     <Icon name="erase" />
