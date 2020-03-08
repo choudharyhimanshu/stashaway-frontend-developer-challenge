@@ -1,0 +1,19 @@
+.transition-width {
+    transition: width 200ms ease-out;
+}
+
+.animate-visibility {
+    opacity: 0;
+    animation: 500ms fadeIn;
+    animation-delay: 200ms;
+    animation-fill-mode: forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
