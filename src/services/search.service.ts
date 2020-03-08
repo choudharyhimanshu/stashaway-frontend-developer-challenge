@@ -46,9 +46,16 @@ class SearchService {
                             return {
                                 id: index,
                                 variety: item['Variety'],
-                                style: item['Style'],
+                                brand: item['Brand'],
+                                style:
+                                    item['Style'] !== 'NaN'
+                                        ? item['Style']
+                                        : undefined,
                                 country: item['Country'],
-                                stars: item['Stars'],
+                                stars:
+                                    item['Stars'] !== 'NaN'
+                                        ? Number(item['Stars'])
+                                        : undefined,
                                 topYear:
                                     topTen !== 'NaN'
                                         ? Number(topTen.split(' ')[0])

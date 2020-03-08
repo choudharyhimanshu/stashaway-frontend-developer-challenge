@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { ISearchItem } from '../models/SearchItem';
-import { Grid, Icon, Header } from 'semantic-ui-react';
+import { Grid, Icon, Header, Label, Rating } from 'semantic-ui-react';
 
 export interface ISearchItemViewProps {
     searchItem: ISearchItem;
@@ -32,7 +32,47 @@ function SearchItemView(props: ISearchItemViewProps) {
             </Grid.Row>
             <Grid.Row>
                 <Grid.Column>
-                    <p>Here comes some description</p>
+                    {searchItem.topRank && searchItem.topYear && (
+                        <Label
+                            basic
+                            size="large"
+                            color="blue"
+                            className="mb-3"
+                            icon
+                        >
+                            <Icon name="trophy" />
+                            {searchItem.topYear}
+                            <Label.Detail>#{searchItem.topRank}</Label.Detail>
+                        </Label>
+                    )}
+
+                    <div className="mb-2">
+                        <strong>Country: </strong>
+                        <Icon name="map marker alternate" />
+                        {searchItem.country}
+                    </div>
+                    <div className="mb-2">
+                        <strong>Style: </strong>
+                        {searchItem.style}
+                    </div>
+                    <div className="mb-2">
+                        <strong>Brand: </strong>
+                        <Label basic className="mr-1">
+                            <Icon name="tag" />
+                            {searchItem.brand}
+                        </Label>
+                    </div>
+                    <div className="mb-2">
+                        <strong>Rating: </strong>
+                        {searchItem.stars && (
+                            <Rating
+                                disabled
+                                icon="star"
+                                defaultRating={searchItem.stars}
+                                maxRating={5}
+                            />
+                        )}
+                    </div>
                 </Grid.Column>
             </Grid.Row>
         </Grid>

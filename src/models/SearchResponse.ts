@@ -3,6 +3,6 @@ export interface ISearchResponse {
     Variety: string;
     Style: string;
     Country: string;
-    Stars: number;
+    Stars: string;
     'Top Ten': string;
 }

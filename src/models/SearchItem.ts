@@ -1,7 +1,8 @@
 export interface ISearchItem {
     id: number;
     variety: string;
-    style: string;
+    brand: string;
+    style?: string;
     country: string;
     stars?: number;
     topYear?: number;
